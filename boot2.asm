@@ -83,9 +83,9 @@ reset:
 
     jc reset    ;se o acesso falhar, tenta novamente
 
-    mov cl,0x0
-    mov si,loadst
-    call puts
+    ;mov cl,0x0
+    ;mov si,loadst
+    ;call puts
 
     jmp load
 
@@ -100,26 +100,26 @@ load:
 
     jc load     ;se o acesso falhar, tenta novamente
 
-    mov cl,0x0
-    mov si,setup
-    call puts
+    ;mov cl,0x0
+    ;mov si,setup
+    ;call puts
 
 
     call istroke
 
-    mov cl,0x0
-    mov si,loadke
-    call puts
+    ;mov cl,0x0
+    ;mov si,loadke
+    ;call puts
 
 
-    mov cl,0x0
-    mov si,runke
-    call puts
+    ;mov cl,0x0
+    ;mov si,runke
+    ;call puts
 
 
-    mov cl,0x0
-    mov si,string
-    call puts
+    ;mov cl,0x0
+    ;mov si,string
+    ;call puts
 
 
     jmp 0x7e00  ;pula para o setor de endereco 0x7e00 (start do boot2)

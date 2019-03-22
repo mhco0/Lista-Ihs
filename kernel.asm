@@ -1,10 +1,6 @@
 org 0x7e00
 jmp 0x0000:start
 
-centerx equ 160
-centery equ 100
-endx equ 320
-endy equ 200
 green equ 0x2
 blue equ 0x1
 yellow equ 0xe
@@ -12,6 +8,22 @@ white equ 0xf
 grey equ 0x7
 magenta equ 0xd
 space equ 0x20
+
+string times 20 db 0
+
+name_len db 20;
+
+endl:
+	pusha 
+	mov ah,0x3
+	mov bh,0
+	int 0x10
+	add dh,1
+	mov dl,0
+	mov ah,0x2;return(dh = row, dl = collum)
+	int 0x10
+	popa
+ret
 
 putchar: ; mov bl, number of color
     mov ah,0xe
@@ -150,6 +162,13 @@ start:
 	mov ds, ax
 	mov es, ax
 
+	mov di,string
+	call gets
+	call endl
+
+	mov si,string
+	call prints
+	call endl
 
 done:
 	jmp $

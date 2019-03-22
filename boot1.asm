@@ -63,9 +63,9 @@ load:
 
     jc load    ;se o acesso falhar, tenta novamente
 
-    mov cl,0x0
-    mov si,string
-    call puts
+    ;mov cl,0x0
+    ;mov si,string
+    ;call puts
 
     jmp 0x500   ;pula para o setor de endereco 0x500 (start do boot2)
 
