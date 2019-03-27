@@ -412,18 +412,43 @@ list_agencies:
 
 .loop:
     cmp al, 0
-    jle main.loop
+    jle main.loop 
 
+    mov ah, al
+    mov di, si
+
+.has_repeated:
+    dec ah
+    
+    cmp ah, 0
+    je .print
+
+    add di, sizeof_entity
+
+    push ax
+    push di
+    push si
+    call strcmp
+    pop si
+    pop di
+    pop ax
+    jnc .has_repeated
+
+    jmp .continue
+
+.print:
     push ax
     push si
     call print_string_ln
     pop si
     pop ax
 
+.continue:
     add si, sizeof_entity
     dec al
 
     jmp .loop
+
 
 list_accounts:
     lea bx, [temp_entity + (sizeof_name + 1) + (sizeof_cpf + 1)]
