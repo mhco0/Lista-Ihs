@@ -10,8 +10,7 @@ MODULE_DESCRIPTION("Basic Driver PCIHello");
 MODULE_AUTHOR("Marcos Olivera");
 
 //-- Enums
-
-
+enum OPS {HEXPORT,INPORT,DISPLAY,RED_LEDS,GREEN_LEDS,KEYS,SWITCHES};
 
 //-- Hardware Handles
 
@@ -50,61 +49,46 @@ static int char_device_release(struct inode *inodep, struct file *filep) {
    return 0;
 }
 
-static ssize_t char_device_read(struct file *filep, char *buf, size_t len, loff_t *off) {
-  short switches;
-  size_t count = len;
-  printk(KERN_ALERT "altera_driver: read %d bytes\n", len);
-  
-  while (len > 0) {
-    switches = ioread16(inport);
-    put_user(switches & 0xFF, buf++);
-    put_user((switches >> 8) & 0xFF, buf++);
-    len -= 2;
-  }
-  return count;
+static ssize_t char_device_read(struct file *filep, char *buf, size_t opt, loff_t *off) {
+  printk(KERN_ALERT "altera_driver: read %d bytes\n", opt);
+    
+  switch(opt){
+		case INPORT:
+				if(copy_to_user(buf,inport,2*sizeof(uint32_t))) return -1;
+			break;
+		case KEYS:
+				if(copy_to_user(buf,keys,2*sizeof(uint32_t))) return -1;
+			break;
+		case SWITCHES:
+				if(copy_to_user(buf,switches,2*sizeof(uint32_t))) return -1;
+			break;
+		default:return -1;
+	}
+
+  return sizeof(uint32_t);
 }
 
 static ssize_t char_device_write(struct file *filep, const char *buf, size_t opt, loff_t *off) {
-	//size_t count = len;
-	//short b = 0;
 	printk(KERN_ALERT "altera_driver: write %d bytes\n", sizeof(uint32_t));
-	printk(KERN_ALERT "value inside buf %d\n",buf[len]);
-	/*while (b <  len) {
-	unsigned k = *((int *) ptr);
-	ptr += 4;
-	b   += 4;
-	iowrite32(k, hexport);
-	}*/
-	//int meme = (int)buf[0];
-
-	//(*hexport) = (void)meme;
-	
 	printk(KERN_ALERT "adress hexport pointer: %p \n" ,hexport);
 	printk(KERN_ALERT "adress red_leds pointer: %p \n", red_leds);
 	printk(KERN_ALERT "adress display pointer: %p \n",display);
 	
 	switch(opt){
-		case 0:
+		case HEXPORT:
+				if(copy_from_user(hexport,buf,2*sizeof(uint32_t))) return -1;
 			break;
-		case 1:
+		case DISPLAY:
+				if(copy_from_user(display,buf,2*sizeof(uint32_t))) return -1;
 			break;
-		case 2:
+		case RED_LEDS:
+				if(copy_from_user(red_leds,buf,2*sizeof(uint32_t))) return -1;
 			break;
-		case 3:
+		case GREEN_LEDS:
+				if(copy_from_user(green_leds,buf,2*sizeof(uint32_t))) return -1;
 			break;
-		case 4:
-			break;
-		case 5:
-			break;
-		case 6:
-			break;
-		default:
+		default:return -1;
 	}
-	
-	//if(copy_from_user(hexport,buf,2*sizeof(uint32_t))) return -1;
-	if(copy_from_user(display,buf,2*sizeof(uint32_t))) return -1;
-	//if(copy_from_user(red_leds,buf,sizeof(uint32_t))) return -1;
-	
 	return sizeof(uint32_t);
 }
 
@@ -156,7 +140,7 @@ static int pci_probe(struct pci_dev *dev, const struct pci_device_id *id) {
 	inport  = ioremap_nocache(resource + 0xC040, 0x20);
 	display = ioremap_nocache(resource + 0xC080, 0x20);
 	red_leds = ioremap_nocache(resource + 0xC100,0x20);
-	green_leds = ioremap_nochache(resource + 0xC0C0,0x20);
+	green_leds = ioremap_nocache(resource + 0xC0C0,0x20);
 	keys = ioremap_nocache(resource + 0xC140,0x20);
 	switches = ioremap_nocache(resource + 0xC180,0x20);
 	return 0;
