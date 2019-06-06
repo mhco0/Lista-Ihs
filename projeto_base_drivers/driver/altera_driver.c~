@@ -7,13 +7,21 @@
 
 MODULE_LICENSE("Dual BSD/GPL");
 MODULE_DESCRIPTION("Basic Driver PCIHello");
-MODULE_AUTHOR("Patrick Schaumont");
+MODULE_AUTHOR("Marcos Olivera");
+
+//-- Enums
+
+
 
 //-- Hardware Handles
 
-static void *hexport;  // handle to 32-bit output PIO
-static void *inport;   // handle to 16-bit input PIO
-static void *display;
+static void * hexport;  // handle to 32-bit output PIO
+static void * inport;   // handle to 16-bit input PIO
+static void * display;
+static void * red_leds;
+static void * green_leds;
+static void * keys;
+static void * switches;
 
 //-- Char Driver Interface
 static int   access_count =  0;
@@ -56,18 +64,48 @@ static ssize_t char_device_read(struct file *filep, char *buf, size_t len, loff_
   return count;
 }
 
-static ssize_t char_device_write(struct file *filep, const char *buf, size_t len, loff_t *off) {
-  char *ptr = (char *) buf;
-  size_t count = len;
-  short b = 0;
-  printk(KERN_ALERT "altera_driver: write %d bytes\n", len);
-  while (b <  len) {
-    unsigned k = *((int *) ptr);
-    ptr += 4;
-    b   += 4;
-    iowrite32(k, hexport);
-  }
-  return count;
+static ssize_t char_device_write(struct file *filep, const char *buf, size_t opt, loff_t *off) {
+	//size_t count = len;
+	//short b = 0;
+	printk(KERN_ALERT "altera_driver: write %d bytes\n", sizeof(uint32_t));
+	printk(KERN_ALERT "value inside buf %d\n",buf[len]);
+	/*while (b <  len) {
+	unsigned k = *((int *) ptr);
+	ptr += 4;
+	b   += 4;
+	iowrite32(k, hexport);
+	}*/
+	//int meme = (int)buf[0];
+
+	//(*hexport) = (void)meme;
+	
+	printk(KERN_ALERT "adress hexport pointer: %p \n" ,hexport);
+	printk(KERN_ALERT "adress red_leds pointer: %p \n", red_leds);
+	printk(KERN_ALERT "adress display pointer: %p \n",display);
+	
+	switch(opt){
+		case 0:
+			break;
+		case 1:
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		case 5:
+			break;
+		case 6:
+			break;
+		default:
+	}
+	
+	//if(copy_from_user(hexport,buf,2*sizeof(uint32_t))) return -1;
+	if(copy_from_user(display,buf,2*sizeof(uint32_t))) return -1;
+	//if(copy_from_user(red_leds,buf,sizeof(uint32_t))) return -1;
+	
+	return sizeof(uint32_t);
 }
 
 //-- PCI Device Interface
@@ -76,6 +114,7 @@ static struct pci_device_id pci_ids[] = {
   { PCI_DEVICE(0x1172, 0x0004), },
   { 0, }
 };
+
 MODULE_DEVICE_TABLE(pci, pci_ids);
 
 static int pci_probe(struct pci_dev *dev, const struct pci_device_id *id);
@@ -96,34 +135,41 @@ static unsigned char pci_get_revision(struct pci_dev *dev) {
 }
 
 static int pci_probe(struct pci_dev *dev, const struct pci_device_id *id) {
-  int vendor;
-  int retval;
-  unsigned long resource;
+	int vendor;
+	int retval;
+	unsigned long resource;
 
-  retval = pci_enable_device(dev);
-  
-  if (pci_get_revision(dev) != 0x01) {
-    printk(KERN_ALERT "altera_driver: cannot find pci device\n");
-    return -ENODEV;
-  }
+	retval = pci_enable_device(dev);
 
-  pci_read_config_dword(dev, 0, &vendor);
-  printk(KERN_ALERT "altera_driver: Found Vendor id: %x\n", vendor);
+	if (pci_get_revision(dev) != 0x01) {
+	printk(KERN_ALERT "altera_driver: cannot find pci device\n");
+	return -ENODEV;
+	}
 
-  resource = pci_resource_start(dev, 0);
-  printk(KERN_ALERT "altera_driver: Resource start at bar 0: %lx\n", resource);
+	pci_read_config_dword(dev, 0, &vendor);
+	printk(KERN_ALERT "altera_driver: Found Vendor id: %x\n", vendor);
 
-  hexport = ioremap_nocache(resource + 0xC000, 0x20);
-  inport  = ioremap_nocache(resource + 0xC020, 0x20);
-  display = ioremap_nocache(resource + 0xC040, 0x20);
+	resource = pci_resource_start(dev, 0);
+	printk(KERN_ALERT "altera_driver: Resource start at bar 0: %lx\n", resource);
 
-  return 0;
+	hexport = ioremap_nocache(resource + 0xC000, 0x20);
+	inport  = ioremap_nocache(resource + 0xC040, 0x20);
+	display = ioremap_nocache(resource + 0xC080, 0x20);
+	red_leds = ioremap_nocache(resource + 0xC100,0x20);
+	green_leds = ioremap_nochache(resource + 0xC0C0,0x20);
+	keys = ioremap_nocache(resource + 0xC140,0x20);
+	switches = ioremap_nocache(resource + 0xC180,0x20);
+	return 0;
 }
 
 static void pci_remove(struct pci_dev *dev) {
   iounmap(hexport);
   iounmap(inport);
   iounmap(display);
+  iounmap(red_leds);
+  iounmap(green_leds);
+  iounmap(keys);
+  iounmap(switches);
 }
 
 

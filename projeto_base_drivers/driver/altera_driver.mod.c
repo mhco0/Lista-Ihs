@@ -28,7 +28,7 @@ __attribute__((section("__versions"))) = {
 	{ 0x5c146c0a, __VMLINUX_SYMBOL_STR(pci_enable_device) },
 	{ 0xc3aaf0a9, __VMLINUX_SYMBOL_STR(__put_user_1) },
 	{ 0xc5534d64, __VMLINUX_SYMBOL_STR(ioread16) },
-	{ 0x436c2179, __VMLINUX_SYMBOL_STR(iowrite32) },
+	{ 0x4f6b400b, __VMLINUX_SYMBOL_STR(_copy_from_user) },
 	{ 0xedc03953, __VMLINUX_SYMBOL_STR(iounmap) },
 	{ 0x50eedeb8, __VMLINUX_SYMBOL_STR(printk) },
 	{ 0xb4390f9a, __VMLINUX_SYMBOL_STR(mcount) },
@@ -41,4 +41,4 @@ __attribute__((section(".modinfo"))) =
 
 MODULE_ALIAS("pci:v00001172d00000004sv*sd*bc*sc*i*");
 
-MODULE_INFO(srcversion, "46823E479C6EAB2DC32D273");
+MODULE_INFO(srcversion, "8A9F87E999B7F6EDB645C06");
