@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <EnsembleReport name="pcihellocore" kind="pcihellocore" version="1.0" fabric="QSYS">
  <!-- Format version 17.0 595 (Future versions may contain additional information.) -->
- <!-- 2019.06.06.15:31:26 -->
+ <!-- 2019.06.06.18:40:17 -->
  <!-- A collection of modules and connections -->
  <parameter name="AUTO_GENERATION_ID">
   <type>java.lang.Integer</type>
-  <value>1559845886</value>
+  <value>1559857217</value>
   <derived>false</derived>
   <enabled>true</enabled>
   <visible>false</visible>
@@ -118,7 +118,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.RESET_VALUE</name>
-   <value>0</value>
+   <value>1077952576</value>
   </assignment>
   <assignment>
    <name>embeddedsw.dts.compatible</name>
@@ -138,7 +138,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.dts.params.resetvalue</name>
-   <value>0</value>
+   <value>1077952576</value>
   </assignment>
   <assignment>
    <name>embeddedsw.dts.vendor</name>
@@ -202,7 +202,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="resetValue">
    <type>long</type>
-   <value>0</value>
+   <value>1077952576</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -1670,7 +1670,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.RESET_VALUE</name>
-   <value>0</value>
+   <value>1077952576</value>
   </assignment>
   <assignment>
    <name>embeddedsw.dts.compatible</name>
@@ -1690,7 +1690,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.dts.params.resetvalue</name>
-   <value>0</value>
+   <value>1077952576</value>
   </assignment>
   <assignment>
    <name>embeddedsw.dts.vendor</name>
@@ -1754,7 +1754,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="resetValue">
    <type>long</type>
-   <value>0</value>
+   <value>1077952576</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -2408,7 +2408,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.DATA_WIDTH</name>
-   <value>16</value>
+   <value>32</value>
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.DO_TEST_BENCH_WIRING</name>
@@ -2460,7 +2460,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.dts.params.altr,gpio-bank-width</name>
-   <value>16</value>
+   <value>32</value>
   </assignment>
   <assignment>
    <name>embeddedsw.dts.params.resetvalue</name>
@@ -2552,7 +2552,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="width">
    <type>int</type>
-   <value>16</value>
+   <value>32</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -3142,7 +3142,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>in_port</name>
     <direction>Input</direction>
-    <width>16</width>
+    <width>32</width>
     <role>export</role>
    </port>
   </interface>
@@ -5668,18 +5668,6 @@ parameters are a RESULT of the module parameters. -->
    </clockDomainMember>
    <clockDomainMember>
     <isBridge>false</isBridge>
-    <moduleName>hexport</moduleName>
-    <slaveName>clk</slaveName>
-    <name>hexport.clk</name>
-   </clockDomainMember>
-   <clockDomainMember>
-    <isBridge>false</isBridge>
-    <moduleName>display</moduleName>
-    <slaveName>clk</slaveName>
-    <name>display.clk</name>
-   </clockDomainMember>
-   <clockDomainMember>
-    <isBridge>false</isBridge>
     <moduleName>green_leds</moduleName>
     <slaveName>clk</slaveName>
     <name>green_leds.clk</name>
@@ -5701,6 +5689,18 @@ parameters are a RESULT of the module parameters. -->
     <moduleName>switches</moduleName>
     <slaveName>clk</slaveName>
     <name>switches.clk</name>
+   </clockDomainMember>
+   <clockDomainMember>
+    <isBridge>false</isBridge>
+    <moduleName>hexport</moduleName>
+    <slaveName>clk</slaveName>
+    <name>hexport.clk</name>
+   </clockDomainMember>
+   <clockDomainMember>
+    <isBridge>false</isBridge>
+    <moduleName>display</moduleName>
+    <slaveName>clk</slaveName>
+    <name>display.clk</name>
    </clockDomainMember>
    <clockDomainMember>
     <isBridge>false</isBridge>
@@ -6982,7 +6982,7 @@ parameters are a RESULT of the module parameters. -->
     <moduleName>inport</moduleName>
     <slaveName>s1</slaveName>
     <name>inport.s1</name>
-    <baseAddress>49184</baseAddress>
+    <baseAddress>49216</baseAddress>
     <span>16</span>
    </memoryBlock>
    <memoryBlock>
@@ -6998,7 +6998,7 @@ parameters are a RESULT of the module parameters. -->
     <moduleName>display</moduleName>
     <slaveName>s1</slaveName>
     <name>display.s1</name>
-    <baseAddress>49216</baseAddress>
+    <baseAddress>49280</baseAddress>
     <span>16</span>
    </memoryBlock>
    <memoryBlock>
@@ -7006,7 +7006,7 @@ parameters are a RESULT of the module parameters. -->
     <moduleName>green_leds</moduleName>
     <slaveName>s1</slaveName>
     <name>green_leds.s1</name>
-    <baseAddress>49248</baseAddress>
+    <baseAddress>49344</baseAddress>
     <span>16</span>
    </memoryBlock>
    <memoryBlock>
@@ -7014,7 +7014,7 @@ parameters are a RESULT of the module parameters. -->
     <moduleName>red_leds</moduleName>
     <slaveName>s1</slaveName>
     <name>red_leds.s1</name>
-    <baseAddress>49280</baseAddress>
+    <baseAddress>49408</baseAddress>
     <span>16</span>
    </memoryBlock>
    <memoryBlock>
@@ -7022,7 +7022,7 @@ parameters are a RESULT of the module parameters. -->
     <moduleName>keys</moduleName>
     <slaveName>s1</slaveName>
     <name>keys.s1</name>
-    <baseAddress>49312</baseAddress>
+    <baseAddress>49472</baseAddress>
     <span>16</span>
    </memoryBlock>
    <memoryBlock>
@@ -7030,7 +7030,7 @@ parameters are a RESULT of the module parameters. -->
     <moduleName>switches</moduleName>
     <slaveName>s1</slaveName>
     <name>switches.s1</name>
-    <baseAddress>49344</baseAddress>
+    <baseAddress>49536</baseAddress>
     <span>16</span>
    </memoryBlock>
    <memoryBlock>
@@ -7915,7 +7915,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.RESET_VALUE</name>
-   <value>0</value>
+   <value>1</value>
   </assignment>
   <assignment>
    <name>embeddedsw.dts.compatible</name>
@@ -7935,7 +7935,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.dts.params.resetvalue</name>
-   <value>0</value>
+   <value>1</value>
   </assignment>
   <assignment>
    <name>embeddedsw.dts.vendor</name>
@@ -7999,7 +7999,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="resetValue">
    <type>long</type>
-   <value>0</value>
+   <value>1</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -9463,7 +9463,7 @@ parameters are a RESULT of the module parameters. -->
   </parameter>
   <parameter name="baseAddress">
    <type>java.math.BigInteger</type>
-   <value>0xc020</value>
+   <value>0xc040</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -9565,7 +9565,7 @@ parameters are a RESULT of the module parameters. -->
   </parameter>
   <parameter name="baseAddress">
    <type>java.math.BigInteger</type>
-   <value>0xc040</value>
+   <value>0xc080</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -9616,7 +9616,7 @@ parameters are a RESULT of the module parameters. -->
   </parameter>
   <parameter name="baseAddress">
    <type>java.math.BigInteger</type>
-   <value>0xc060</value>
+   <value>0xc0c0</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -9667,7 +9667,7 @@ parameters are a RESULT of the module parameters. -->
   </parameter>
   <parameter name="baseAddress">
    <type>java.math.BigInteger</type>
-   <value>0xc080</value>
+   <value>0xc100</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -9718,7 +9718,7 @@ parameters are a RESULT of the module parameters. -->
   </parameter>
   <parameter name="baseAddress">
    <type>java.math.BigInteger</type>
-   <value>0xc0a0</value>
+   <value>0xc140</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -9769,7 +9769,7 @@ parameters are a RESULT of the module parameters. -->
   </parameter>
   <parameter name="baseAddress">
    <type>java.math.BigInteger</type>
-   <value>0xc0c0</value>
+   <value>0xc180</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -9910,60 +9910,6 @@ parameters are a RESULT of the module parameters. -->
   <endConnectionPoint>clk</endConnectionPoint>
  </connection>
  <connection
-   name="pcie_hard_ip_0.pcie_core_clk/hexport.clk"
-   kind="clock"
-   version="17.0"
-   start="pcie_hard_ip_0.pcie_core_clk"
-   end="hexport.clk">
-  <parameter name="deviceFamily">
-   <type>java.lang.String</type>
-   <value>UNKNOWN</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <parameter name="generateLegacySim">
-   <type>boolean</type>
-   <value>false</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <startModule>pcie_hard_ip_0</startModule>
-  <startConnectionPoint>pcie_core_clk</startConnectionPoint>
-  <endModule>hexport</endModule>
-  <endConnectionPoint>clk</endConnectionPoint>
- </connection>
- <connection
-   name="pcie_hard_ip_0.pcie_core_clk/display.clk"
-   kind="clock"
-   version="17.0"
-   start="pcie_hard_ip_0.pcie_core_clk"
-   end="display.clk">
-  <parameter name="deviceFamily">
-   <type>java.lang.String</type>
-   <value>UNKNOWN</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <parameter name="generateLegacySim">
-   <type>boolean</type>
-   <value>false</value>
-   <derived>false</derived>
-   <enabled>true</enabled>
-   <visible>true</visible>
-   <valid>true</valid>
-  </parameter>
-  <startModule>pcie_hard_ip_0</startModule>
-  <startConnectionPoint>pcie_core_clk</startConnectionPoint>
-  <endModule>display</endModule>
-  <endConnectionPoint>clk</endConnectionPoint>
- </connection>
- <connection
    name="pcie_hard_ip_0.pcie_core_clk/green_leds.clk"
    kind="clock"
    version="17.0"
@@ -10069,6 +10015,60 @@ parameters are a RESULT of the module parameters. -->
   <startModule>pcie_hard_ip_0</startModule>
   <startConnectionPoint>pcie_core_clk</startConnectionPoint>
   <endModule>switches</endModule>
+  <endConnectionPoint>clk</endConnectionPoint>
+ </connection>
+ <connection
+   name="pcie_hard_ip_0.pcie_core_clk/hexport.clk"
+   kind="clock"
+   version="17.0"
+   start="pcie_hard_ip_0.pcie_core_clk"
+   end="hexport.clk">
+  <parameter name="deviceFamily">
+   <type>java.lang.String</type>
+   <value>UNKNOWN</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <parameter name="generateLegacySim">
+   <type>boolean</type>
+   <value>false</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <startModule>pcie_hard_ip_0</startModule>
+  <startConnectionPoint>pcie_core_clk</startConnectionPoint>
+  <endModule>hexport</endModule>
+  <endConnectionPoint>clk</endConnectionPoint>
+ </connection>
+ <connection
+   name="pcie_hard_ip_0.pcie_core_clk/display.clk"
+   kind="clock"
+   version="17.0"
+   start="pcie_hard_ip_0.pcie_core_clk"
+   end="display.clk">
+  <parameter name="deviceFamily">
+   <type>java.lang.String</type>
+   <value>UNKNOWN</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <parameter name="generateLegacySim">
+   <type>boolean</type>
+   <value>false</value>
+   <derived>false</derived>
+   <enabled>true</enabled>
+   <visible>true</visible>
+   <valid>true</valid>
+  </parameter>
+  <startModule>pcie_hard_ip_0</startModule>
+  <startConnectionPoint>pcie_core_clk</startConnectionPoint>
+  <endModule>display</endModule>
   <endConnectionPoint>clk</endConnectionPoint>
  </connection>
  <connection

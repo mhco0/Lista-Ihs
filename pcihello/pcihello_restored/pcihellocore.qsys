@@ -52,7 +52,7 @@
       }
       datum sopceditor_expanded
       {
-         value = "0";
+         value = "1";
          type = "boolean";
       }
    }
@@ -73,7 +73,7 @@
       }
       datum sopceditor_expanded
       {
-         value = "0";
+         value = "1";
          type = "boolean";
       }
    }
@@ -243,7 +243,7 @@
   <parameter name="edgeType" value="RISING" />
   <parameter name="generateIRQ" value="false" />
   <parameter name="irqType" value="LEVEL" />
-  <parameter name="resetValue" value="0" />
+  <parameter name="resetValue" value="1077952576" />
   <parameter name="simDoTestBenchWiring" value="false" />
   <parameter name="simDrivenValue" value="0" />
   <parameter name="width" value="32" />
@@ -271,7 +271,7 @@
   <parameter name="edgeType" value="RISING" />
   <parameter name="generateIRQ" value="false" />
   <parameter name="irqType" value="LEVEL" />
-  <parameter name="resetValue" value="0" />
+  <parameter name="resetValue" value="1077952576" />
   <parameter name="simDoTestBenchWiring" value="false" />
   <parameter name="simDrivenValue" value="0" />
   <parameter name="width" value="32" />
@@ -288,7 +288,7 @@
   <parameter name="resetValue" value="0" />
   <parameter name="simDoTestBenchWiring" value="false" />
   <parameter name="simDrivenValue" value="0" />
-  <parameter name="width" value="16" />
+  <parameter name="width" value="32" />
  </module>
  <module name="keys" kind="altera_avalon_pio" version="17.0" enabled="1">
   <parameter name="bitClearingEdgeCapReg" value="false" />
@@ -438,7 +438,7 @@
   <parameter name="edgeType" value="RISING" />
   <parameter name="generateIRQ" value="false" />
   <parameter name="irqType" value="LEVEL" />
-  <parameter name="resetValue" value="0" />
+  <parameter name="resetValue" value="1" />
   <parameter name="simDoTestBenchWiring" value="false" />
   <parameter name="simDrivenValue" value="0" />
   <parameter name="width" value="32" />
@@ -472,7 +472,7 @@
    start="pcie_hard_ip_0.bar0"
    end="inport.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0xc020" />
+  <parameter name="baseAddress" value="0xc040" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -490,7 +490,7 @@
    start="pcie_hard_ip_0.bar0"
    end="display.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0xc040" />
+  <parameter name="baseAddress" value="0xc080" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -499,7 +499,7 @@
    start="pcie_hard_ip_0.bar0"
    end="green_leds.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0xc060" />
+  <parameter name="baseAddress" value="0xc0c0" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -508,7 +508,7 @@
    start="pcie_hard_ip_0.bar0"
    end="red_leds.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0xc080" />
+  <parameter name="baseAddress" value="0xc100" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -517,7 +517,7 @@
    start="pcie_hard_ip_0.bar0"
    end="keys.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0xc0a0" />
+  <parameter name="baseAddress" value="0xc140" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -526,7 +526,7 @@
    start="pcie_hard_ip_0.bar0"
    end="switches.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0xc0c0" />
+  <parameter name="baseAddress" value="0xc180" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -552,16 +552,6 @@
    kind="clock"
    version="17.0"
    start="pcie_hard_ip_0.pcie_core_clk"
-   end="hexport.clk" />
- <connection
-   kind="clock"
-   version="17.0"
-   start="pcie_hard_ip_0.pcie_core_clk"
-   end="display.clk" />
- <connection
-   kind="clock"
-   version="17.0"
-   start="pcie_hard_ip_0.pcie_core_clk"
    end="green_leds.clk" />
  <connection
    kind="clock"
@@ -578,6 +568,16 @@
    version="17.0"
    start="pcie_hard_ip_0.pcie_core_clk"
    end="switches.clk" />
+ <connection
+   kind="clock"
+   version="17.0"
+   start="pcie_hard_ip_0.pcie_core_clk"
+   end="hexport.clk" />
+ <connection
+   kind="clock"
+   version="17.0"
+   start="pcie_hard_ip_0.pcie_core_clk"
+   end="display.clk" />
  <connection
    kind="clock"
    version="17.0"

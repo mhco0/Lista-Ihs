@@ -3,7 +3,7 @@
 			display_external_connection_export     : out std_logic_vector(31 downto 0);                    -- export
 			green_leds_external_connection_export  : out std_logic_vector(31 downto 0);                    -- export
 			hexport_external_connection_export     : out std_logic_vector(31 downto 0);                    -- export
-			inport_external_connection_export      : in  std_logic_vector(15 downto 0) := (others => 'X'); -- export
+			inport_external_connection_export      : in  std_logic_vector(31 downto 0) := (others => 'X'); -- export
 			keys_external_connection_export        : in  std_logic_vector(31 downto 0) := (others => 'X'); -- export
 			pcie_hard_ip_0_pcie_rstn_export        : in  std_logic                     := 'X';             -- export
 			pcie_hard_ip_0_powerdown_pll_powerdown : in  std_logic                     := 'X';             -- pll_powerdown

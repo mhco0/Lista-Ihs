@@ -122,17 +122,19 @@ wire [31:0] switches;
 //////////// FAN Control //////////
 assign FAN_CTRL = 1'b1; // turn on FAN
 
-assign HEX0 = hexbus[ 6: 0];
-assign HEX1 = hexbus[14: 8];
-assign HEX2 = hexbus[22:16];
-assign HEX3 = hexbus[30:24];
+//Right 7Seg
+assign HEX1 = hexbus[22:16];
+assign HEX0 = hexbus[30:24];
+assign HEX2 = hexbus[14: 8];
+assign HEX3 = hexbus[ 6: 0];
+
+//Left 7Seg
+assign HEX4 = display[22:16];
+assign HEX5 = display[30:24];
+assign HEX6 = display[14: 8];
+assign HEX7 = display[ 6: 0];
 
 assign inbus = SW[15:0];
-
-assign HEX4 = display[ 6: 0];
-assign HEX5 = display[14: 8];
-assign HEX6 = display[22:16];
-assign HEX7 = display[30:24];
 
 assign LEDG = led_green[8:0];
 

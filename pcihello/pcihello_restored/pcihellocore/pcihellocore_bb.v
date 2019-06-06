@@ -17,7 +17,7 @@ module pcihellocore (
 	output	[31:0]	display_external_connection_export;
 	output	[31:0]	green_leds_external_connection_export;
 	output	[31:0]	hexport_external_connection_export;
-	input	[15:0]	inport_external_connection_export;
+	input	[31:0]	inport_external_connection_export;
 	input	[31:0]	keys_external_connection_export;
 	input		pcie_hard_ip_0_pcie_rstn_export;
 	input		pcie_hard_ip_0_powerdown_pll_powerdown;

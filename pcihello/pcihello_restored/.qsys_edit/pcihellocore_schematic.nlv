@@ -19,20 +19,20 @@ preplace inst pcihellocore.display -pg 1 -lvl 2 -y 30
 preplace inst pcihellocore.pcie_hard_ip_0.altgx_internal -pg 1
 preplace inst pcihellocore.pcie_hard_ip_0 -pg 1 -lvl 1 -y 360
 preplace inst pcihellocore.keys -pg 1 -lvl 2 -y 330
+preplace netloc EXPORT<net_container>pcihellocore</net_container>(SLAVE)pcie_hard_ip_0.pcie_rstn,(SLAVE)pcihellocore.pcie_hard_ip_0_pcie_rstn) 1 0 1 NJ
+preplace netloc FAN_OUT<net_container>pcihellocore</net_container>(SLAVE)inport.s1,(SLAVE)display.s1,(SLAVE)pcie_hard_ip_0.cra,(SLAVE)pcie_hard_ip_0.txs,(MASTER)pcie_hard_ip_0.bar0,(SLAVE)keys.s1,(SLAVE)switches.s1,(SLAVE)green_leds.s1,(SLAVE)hexport.s1,(SLAVE)red_leds.s1) 1 0 2 250 820 620
+preplace netloc FAN_OUT<net_container>pcihellocore</net_container>(SLAVE)display.reset,(SLAVE)inport.reset,(MASTER)pcie_hard_ip_0.pcie_core_reset,(SLAVE)green_leds.reset,(SLAVE)red_leds.reset,(SLAVE)keys.reset,(SLAVE)hexport.reset,(SLAVE)switches.reset) 1 1 1 640
+preplace netloc FAN_OUT<net_container>pcihellocore</net_container>(SLAVE)pcie_hard_ip_0.reconfig_gxbclk,(SLAVE)display.clk,(SLAVE)pcie_hard_ip_0.fixedclk,(SLAVE)pcie_hard_ip_0.cal_blk_clk,(SLAVE)inport.clk,(SLAVE)green_leds.clk,(SLAVE)hexport.clk,(SLAVE)red_leds.clk,(SLAVE)switches.clk,(MASTER)pcie_hard_ip_0.pcie_core_clk,(SLAVE)keys.clk) 1 0 2 230 780 560
 preplace netloc EXPORT<net_container>pcihellocore</net_container>(SLAVE)pcihellocore.switches_external_connection,(SLAVE)switches.external_connection) 1 0 2 NJ 760 NJ
-preplace netloc EXPORT<net_container>pcihellocore</net_container>(SLAVE)pcihellocore.pcie_hard_ip_0_pcie_rstn,(SLAVE)pcie_hard_ip_0.pcie_rstn) 1 0 1 NJ
 preplace netloc EXPORT<net_container>pcihellocore</net_container>(SLAVE)pcihellocore.pcie_hard_ip_0_tx_out,(SLAVE)pcie_hard_ip_0.tx_out) 1 0 1 NJ
-preplace netloc FAN_OUT<net_container>pcihellocore</net_container>(MASTER)pcie_hard_ip_0.bar0,(SLAVE)red_leds.s1,(SLAVE)inport.s1,(SLAVE)pcie_hard_ip_0.cra,(SLAVE)green_leds.s1,(SLAVE)switches.s1,(SLAVE)hexport.s1,(SLAVE)display.s1,(SLAVE)keys.s1,(SLAVE)pcie_hard_ip_0.txs) 1 0 2 250 780 600
+preplace netloc EXPORT<net_container>pcihellocore</net_container>(SLAVE)pcihellocore.pcie_hard_ip_0_rx_in,(SLAVE)pcie_hard_ip_0.rx_in) 1 0 1 NJ
+preplace netloc EXPORT<net_container>pcihellocore</net_container>(SLAVE)inport.external_connection,(SLAVE)pcihellocore.inport_external_connection) 1 0 2 NJ 800 NJ
 preplace netloc EXPORT<net_container>pcihellocore</net_container>(SLAVE)pcihellocore.display_external_connection,(SLAVE)display.external_connection) 1 0 2 NJ 60 NJ
 preplace netloc EXPORT<net_container>pcihellocore</net_container>(SLAVE)pcihellocore.hexport_external_connection,(SLAVE)hexport.external_connection) 1 0 2 NJ 260 NJ
-preplace netloc FAN_OUT<net_container>pcihellocore</net_container>(SLAVE)switches.reset,(MASTER)pcie_hard_ip_0.pcie_core_reset,(SLAVE)red_leds.reset,(SLAVE)keys.reset,(SLAVE)display.reset,(SLAVE)green_leds.reset,(SLAVE)hexport.reset,(SLAVE)inport.reset) 1 1 1 640
-preplace netloc FAN_OUT<net_container>pcihellocore</net_container>(SLAVE)red_leds.clk,(SLAVE)inport.clk,(MASTER)pcie_hard_ip_0.pcie_core_clk,(SLAVE)switches.clk,(SLAVE)green_leds.clk,(SLAVE)pcie_hard_ip_0.cal_blk_clk,(SLAVE)display.clk,(SLAVE)keys.clk,(SLAVE)pcie_hard_ip_0.fixedclk,(SLAVE)pcie_hard_ip_0.reconfig_gxbclk,(SLAVE)hexport.clk) 1 0 2 230 300 580
+preplace netloc EXPORT<net_container>pcihellocore</net_container>(SLAVE)red_leds.external_connection,(SLAVE)pcihellocore.red_leds_external_connection) 1 0 2 NJ 740 NJ
 preplace netloc EXPORT<net_container>pcihellocore</net_container>(SLAVE)pcihellocore.green_leds_external_connection,(SLAVE)green_leds.external_connection) 1 0 2 NJ 160 NJ
-preplace netloc EXPORT<net_container>pcihellocore</net_container>(SLAVE)pcihellocore.inport_external_connection,(SLAVE)inport.external_connection) 1 0 2 NJ 800 NJ
-preplace netloc EXPORT<net_container>pcihellocore</net_container>(SLAVE)pcie_hard_ip_0.rx_in,(SLAVE)pcihellocore.pcie_hard_ip_0_rx_in) 1 0 1 NJ
 preplace netloc EXPORT<net_container>pcihellocore</net_container>(SLAVE)pcie_hard_ip_0.refclk,(SLAVE)pcihellocore.pcie_hard_ip_0_refclk) 1 0 1 NJ
 preplace netloc EXPORT<net_container>pcihellocore</net_container>(SLAVE)pcie_hard_ip_0.powerdown,(SLAVE)pcihellocore.pcie_hard_ip_0_powerdown) 1 0 1 NJ
 preplace netloc EXPORT<net_container>pcihellocore</net_container>(SLAVE)pcihellocore.keys_external_connection,(SLAVE)keys.external_connection) 1 0 2 NJ 280 NJ
-preplace netloc EXPORT<net_container>pcihellocore</net_container>(SLAVE)pcihellocore.red_leds_external_connection,(SLAVE)red_leds.external_connection) 1 0 2 NJ 320 NJ
 levelinfo -pg 1 0 200 870
 levelinfo -hier pcihellocore 210 380 710 860

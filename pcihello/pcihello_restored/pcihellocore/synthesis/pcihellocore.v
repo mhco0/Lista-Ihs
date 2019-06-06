@@ -7,7 +7,7 @@ module pcihellocore (
 		output wire [31:0] display_external_connection_export,     //    display_external_connection.export
 		output wire [31:0] green_leds_external_connection_export,  // green_leds_external_connection.export
 		output wire [31:0] hexport_external_connection_export,     //    hexport_external_connection.export
-		input  wire [15:0] inport_external_connection_export,      //     inport_external_connection.export
+		input  wire [31:0] inport_external_connection_export,      //     inport_external_connection.export
 		input  wire [31:0] keys_external_connection_export,        //       keys_external_connection.export
 		input  wire        pcie_hard_ip_0_pcie_rstn_export,        //       pcie_hard_ip_0_pcie_rstn.export
 		input  wire        pcie_hard_ip_0_powerdown_pll_powerdown, //       pcie_hard_ip_0_powerdown.pll_powerdown
@@ -88,7 +88,7 @@ module pcihellocore (
 		.out_port   (display_external_connection_export)       // external_connection.export
 	);
 
-	pcihellocore_display green_leds (
+	pcihellocore_green_leds green_leds (
 		.clk        (pcie_hard_ip_0_pcie_core_clk_clk),           //                 clk.clk
 		.reset_n    (~rst_controller_reset_out_reset),            //               reset.reset_n
 		.address    (mm_interconnect_0_green_leds_s1_address),    //                  s1.address
@@ -118,7 +118,7 @@ module pcihellocore (
 		.in_port  (inport_external_connection_export)     // external_connection.export
 	);
 
-	pcihellocore_keys keys (
+	pcihellocore_inport keys (
 		.clk      (pcie_hard_ip_0_pcie_core_clk_clk),   //                 clk.clk
 		.reset_n  (~rst_controller_reset_out_reset),    //               reset.reset_n
 		.address  (mm_interconnect_0_keys_s1_address),  //                  s1.address
@@ -345,7 +345,7 @@ module pcihellocore (
 		.fixedclk_clk                       (pcie_hard_ip_0_pcie_core_clk_clk)                    //           fixedclk.clk
 	);
 
-	pcihellocore_display red_leds (
+	pcihellocore_red_leds red_leds (
 		.clk        (pcie_hard_ip_0_pcie_core_clk_clk),         //                 clk.clk
 		.reset_n    (~rst_controller_reset_out_reset),          //               reset.reset_n
 		.address    (mm_interconnect_0_red_leds_s1_address),    //                  s1.address
@@ -356,7 +356,7 @@ module pcihellocore (
 		.out_port   (red_leds_external_connection_export)       // external_connection.export
 	);
 
-	pcihellocore_keys switches (
+	pcihellocore_inport switches (
 		.clk      (pcie_hard_ip_0_pcie_core_clk_clk),       //                 clk.clk
 		.reset_n  (~rst_controller_reset_out_reset),        //               reset.reset_n
 		.address  (mm_interconnect_0_switches_s1_address),  //                  s1.address

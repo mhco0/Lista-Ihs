@@ -27,8 +27,8 @@ agreement for further details.
 	(port
 		(pt 0 192)
 		(input)
-		(text "inport_external_connection_export[15..0]" (rect 0 0 159 12)(font "Arial" (font_size 8)))
-		(text "inport_external_connection_export[15..0]" (rect 4 181 244 192)(font "Arial" (font_size 8)))
+		(text "inport_external_connection_export[31..0]" (rect 0 0 159 12)(font "Arial" (font_size 8)))
+		(text "inport_external_connection_export[31..0]" (rect 4 181 244 192)(font "Arial" (font_size 8)))
 		(line (pt 0 192)(pt 256 192)(line_width 3))
 	)
 	(port
@@ -141,7 +141,7 @@ agreement for further details.
 		(text "export" (rect 261 483 558 976)(font "Arial" (color 0 0 0)))
 		(text "switches_external_connection" (rect 83 499 334 1011)(font "Arial" (color 128 0 0)(font_size 9)))
 		(text "export" (rect 261 523 558 1056)(font "Arial" (color 0 0 0)))
-		(text " pcihellocore " (rect 555 544 1194 1098)(font "Arial" ))
+		(text " system " (rect 573 544 1194 1098)(font "Arial" ))
 		(line (pt 256 32)(pt 352 32)(line_width 1))
 		(line (pt 352 32)(pt 352 544)(line_width 1))
 		(line (pt 256 544)(pt 352 544)(line_width 1))
