@@ -1,16 +1,17 @@
 #include<bits/stdc++.h>
 #include<allegro5/allegro5.h>
 #include<allegro5/allegro_font.h>
+#include<allminigames.hpp>
 #define FPS 60.0
 #define HEIGHT 1080.0
 #define WIDTH 1920.0
 using namespace std;
 
-
-
 int main(void){
 	ios::sync_with_stdio(false);
 	cin.tie(0);
+	
+	minigames * m = new genius();
 
 	al_init();
     al_install_keyboard();
@@ -26,6 +27,8 @@ int main(void){
 
     al_start_timer(timer);
     al_register_event_source(qu, al_get_keyboard_event_source());
+	m->start();
+	m->run();
 
     while(true){
     	al_wait_for_event(qu, &ev);
@@ -37,7 +40,8 @@ int main(void){
         	break;
 
         if (ev.type == ALLEGRO_EVENT_TIMER && al_is_event_queue_empty(qu)) {
-            al_flip_display();
+            
+          	al_flip_display();
         }
 
 

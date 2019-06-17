@@ -1,22 +1,31 @@
-#include<bits/stdc++.h>
-using namespace std;
+#ifndef MINIGAMES_HPP
+	#define MINIGAMES_HPP 1
+	#include <iostream>
+#endif
 
-class minigame{
-private:
+class minigames{
+protected:
 	int trys,place;
 public:
 	enum class status:int {stoped,started,finished};
 	status my_status;
 	
-	minigame(void);
-	virtual void start();
-	virtual void finish();
+	minigames(void);
+	minigames(int p);
+	virtual void start(void) = 0;
+	virtual void finish(void) = 0;
+	virtual void run(void) = 0;
+	virtual void stop(void) = 0;
 };
 
-minigame::minigame(void){
+minigames::minigames(void){
 	this->trys = 0;
 	this->place = -1;
-	this->my_status = minigame::status::stoped;
+	this->my_status = minigames::status::stoped;
+}
+
+minigames::minigames(int p):minigames(){
+	this->place = p;
 }
 
 enum class difficulty {easy,medium,hard};

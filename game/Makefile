@@ -8,8 +8,8 @@ GAMELIB = -Isrc/minigames
 
 genius.o: 
 	g++ -c src/minigames/genius.cpp $(ALLEGROFLAGS) $(GAMELIB) $(CPPFLAGS)
-all:
-	g++ main.cpp $(CPPFLAGS) $(ALLEGROFLAGS)  -o CinBomb
+all: genius.o
+	g++ main.cpp genius.o $(CPPFLAGS) $(ALLEGROFLAGS) $(GAMELIB)  -o CinBomb
 clean:
 	rm CinBomb
 run:

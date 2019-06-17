@@ -1,29 +1,16 @@
+#ifndef GENIUS_HPP 
+	#include <genius.hpp>
+#endif
+#ifndef MINIGAMES_HPP
+	#include <minigames.hpp>
+#endif
 
-#include <bits/stdc++.h>
-#include <minigames.hpp>
-
-class genius : protected minigame {
-private:
-	enum class color : int {red = 0,yellow,green,blue};
-	difficulty level;
-	vector<color> sequal;
-public:
-	genius(void);
-	void start(void);
-	void run(void);
-	void stop(void);
-	void finish(void);
-	void next_level(void);
-	void reset(void);
-};
-
-
-genius::genius(void):minigame(){
+genius::genius(void):minigames(){
 	level = difficulty::easy;
 }
 
 void genius::start(void){
-	this->my_status = minigame::status::started;
+	this->my_status = minigames::status::started;
 }
 
 void genius::run(void){
@@ -63,12 +50,14 @@ void genius::next_level(void){
 
 void genius::reset(void){
 	level = difficulty::easy;
+	this->trys++;
 }
 	
 void genius::stop(void){
-	this->my_status = minigame::status::stoped;
+	this->my_status = minigames::status::stoped;
 }
 
 void genius::finish(void){
-	this->my_status = minigame::status::finished;
+	this->my_status = minigames::status::finished;
 }
+
