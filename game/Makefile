@@ -4,9 +4,10 @@ ALLEGROFLAGS = -lallegro -lallegro_image -lallegro_ttf -lallegro_font
 
 GAMELIB = -Isrc/minigames
 
-genius.o:genius.cpp
-	g++ -c genius.cpp $(ALLEGROFLAGS) $(CPPFLAGS)
 
+
+genius.o: 
+	g++ -c src/minigames/genius.cpp $(ALLEGROFLAGS) $(GAMELIB) $(CPPFLAGS)
 all:
 	g++ main.cpp $(CPPFLAGS) $(ALLEGROFLAGS)  -o CinBomb
 clean:
