@@ -1,7 +1,5 @@
-#ifndef MINIGAMES_HPP
-	#define MINIGAMES_HPP 1
-	#include <iostream>
-#endif
+#define MINIGAMES_HPP 1
+#include <iostream>
 
 class minigames{
 protected:

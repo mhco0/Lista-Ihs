@@ -1,12 +1,9 @@
-#ifndef GENIUS_HPP 
-	#define GENIUS_HPP 1 
-	#include <bits/stdc++.h>
-	using namespace std;
-#endif
-
 #ifndef MINIGAMES_HPP
-	#include <minigames.hpp>
+	#include "minigames.hpp"
 #endif
+#define GENIUS_HPP 1
+#include<bits/stdc++.h>
+using namespace std;
 
 class genius : public minigames {
 public:

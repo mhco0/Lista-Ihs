@@ -1,6 +1,6 @@
 #ifndef GENIUS_HPP
-	#include<genius.hpp>
+	#include "genius.hpp"
 #endif
 #ifndef MINIGAMES_HPP
-	#include <minigames.hpp>
+	#include "minigames.hpp"
 #endif

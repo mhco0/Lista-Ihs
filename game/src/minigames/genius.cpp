@@ -1,8 +1,8 @@
 #ifndef GENIUS_HPP 
-	#include <genius.hpp>
+	#include "genius.hpp"
 #endif
 #ifndef MINIGAMES_HPP
-	#include <minigames.hpp>
+	#include "minigames.hpp"
 #endif
 
 genius::genius(void):minigames(){
@@ -42,6 +42,16 @@ void genius::run(void){
 	}
 }
 
+void genius::stop(void){
+	this->my_status = minigames::status::stoped;
+}
+
+
+void genius::finish(void){
+	this->my_status = minigames::status::finished;
+}
+
+
 void genius::next_level(void){
 	if(level == difficulty::easy) level = difficulty::medium;
 	else if(level == difficulty::medium) level = difficulty::hard;
@@ -52,12 +62,3 @@ void genius::reset(void){
 	level = difficulty::easy;
 	this->trys++;
 }
-	
-void genius::stop(void){
-	this->my_status = minigames::status::stoped;
-}
-
-void genius::finish(void){
-	this->my_status = minigames::status::finished;
-}
-
