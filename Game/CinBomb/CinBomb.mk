@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Marcos Heitor Carvalho de Oliveira
-Date                   :=19/06/19
+Date                   :=20/06/19
 CodeLitePath           :=/home/CIN/mhco/.codelite
 LinkerName             :=g++
 SharedObjectLinkerName :=g++ -shared -fPIC
@@ -60,7 +60,7 @@ AS       := as
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects0=$(IntermediateDirectory)/up_up_up_meme_memeteste_src_genius.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_up_meme_memeteste_src_main.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_up_meme_memeteste_src_minigames.cpp$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/up_up_up_meme_memeteste_src_main.cpp$(ObjectSuffix) 
 
 
 
@@ -91,14 +91,6 @@ PreBuild:
 ##
 ## Objects
 ##
-$(IntermediateDirectory)/up_up_up_meme_memeteste_src_genius.cpp$(ObjectSuffix): ../../../meme/memeteste/src/genius.cpp $(IntermediateDirectory)/up_up_up_meme_memeteste_src_genius.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/CIN/mhco/Desktop/meme/memeteste/src/genius.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_up_meme_memeteste_src_genius.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/up_up_up_meme_memeteste_src_genius.cpp$(DependSuffix): ../../../meme/memeteste/src/genius.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_up_meme_memeteste_src_genius.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_up_meme_memeteste_src_genius.cpp$(DependSuffix) -MM ../../../meme/memeteste/src/genius.cpp
-
-$(IntermediateDirectory)/up_up_up_meme_memeteste_src_genius.cpp$(PreprocessSuffix): ../../../meme/memeteste/src/genius.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_up_meme_memeteste_src_genius.cpp$(PreprocessSuffix) ../../../meme/memeteste/src/genius.cpp
-
 $(IntermediateDirectory)/up_up_up_meme_memeteste_src_main.cpp$(ObjectSuffix): ../../../meme/memeteste/src/main.cpp $(IntermediateDirectory)/up_up_up_meme_memeteste_src_main.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/CIN/mhco/Desktop/meme/memeteste/src/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_up_meme_memeteste_src_main.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/up_up_up_meme_memeteste_src_main.cpp$(DependSuffix): ../../../meme/memeteste/src/main.cpp
@@ -106,14 +98,6 @@ $(IntermediateDirectory)/up_up_up_meme_memeteste_src_main.cpp$(DependSuffix): ..
 
 $(IntermediateDirectory)/up_up_up_meme_memeteste_src_main.cpp$(PreprocessSuffix): ../../../meme/memeteste/src/main.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_up_meme_memeteste_src_main.cpp$(PreprocessSuffix) ../../../meme/memeteste/src/main.cpp
-
-$(IntermediateDirectory)/up_up_up_meme_memeteste_src_minigames.cpp$(ObjectSuffix): ../../../meme/memeteste/src/minigames.cpp $(IntermediateDirectory)/up_up_up_meme_memeteste_src_minigames.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/CIN/mhco/Desktop/meme/memeteste/src/minigames.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_up_meme_memeteste_src_minigames.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/up_up_up_meme_memeteste_src_minigames.cpp$(DependSuffix): ../../../meme/memeteste/src/minigames.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_up_meme_memeteste_src_minigames.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_up_meme_memeteste_src_minigames.cpp$(DependSuffix) -MM ../../../meme/memeteste/src/minigames.cpp
-
-$(IntermediateDirectory)/up_up_up_meme_memeteste_src_minigames.cpp$(PreprocessSuffix): ../../../meme/memeteste/src/minigames.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_up_meme_memeteste_src_minigames.cpp$(PreprocessSuffix) ../../../meme/memeteste/src/minigames.cpp
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

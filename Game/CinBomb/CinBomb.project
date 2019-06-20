@@ -3,9 +3,7 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
-    <File Name="../../../meme/memeteste/src/genius.cpp"/>
     <File Name="../../../meme/memeteste/src/main.cpp"/>
-    <File Name="../../../meme/memeteste/src/minigames.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="img">
     <File Name="../../../meme/memeteste/img/back_placeholder.png"/>
@@ -20,11 +18,10 @@
     <File Name="img/bomb2.png"/>
     <File Name="img/bomb3.png"/>
     <File Name="img/bomb4.png"/>
+    <File Name="img/bin.png"/>
   </VirtualDirectory>
   <VirtualDirectory Name="header">
-    <File Name="../../../meme/memeteste/header/allminigames.h"/>
     <File Name="../../../meme/memeteste/header/genius.h"/>
-    <File Name="../../../meme/memeteste/header/minigames.h"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
@@ -116,4 +113,7 @@
       </Completion>
     </Configuration>
   </Settings>
+  <VirtualDirectory Name="font">
+    <File Name="fonts/DS-DIGI.TTF"/>
+  </VirtualDirectory>
 </CodeLite_Project>

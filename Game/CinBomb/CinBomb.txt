@@ -1,1 +1,1 @@
-./Debug/up_up_up_meme_memeteste_src_genius.cpp.o ./Debug/up_up_up_meme_memeteste_src_main.cpp.o ./Debug/up_up_up_meme_memeteste_src_minigames.cpp.o
+./Debug/up_up_up_meme_memeteste_src_main.cpp.o
