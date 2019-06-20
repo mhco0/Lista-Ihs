@@ -5,9 +5,8 @@
 
 enum OPS {HEXPORT,INPORT,DISPLAY,RED_LEDS,GREEN_LEDS,KEYS,SWITCHES};
 
-uint32_t number = 0x79794040;
+uint32_t number = 0x40407979;
 uint32_t number2 = 2;
-uint32_t number3 = 0b10101011;
 unsigned char hexdigit[] = {0x24, 0x79, 0x40, 0x40,
                             0x40, 0x40, 0x40, 0x40, 
                             0xFF, 0x40, 0x40, 0x40,
@@ -29,8 +28,6 @@ void real_write(int debug,int dev,unsigned char * buffer,int opt){
 	if( ret != -1) printf("ok -> %d\n",debug);
 }
 
-int cu;
-
 int main() {
 	int i, j = 1, k;
 
@@ -38,11 +35,14 @@ int main() {
 
 	printf("%d\n",dev);
 
-	real_write(0,dev,&number3,GREEN_LEDS);
-	
-	read(dev,&cu,KEYS);
-	
-	printf("%d\n",cu);
+	real_write(0,dev,&number,HEXPORT);
+
+	int ret = read(dev,&number2,KEYS);
+
+	if(ret == -1) printf("deu erro na leitura\n");
+
+	printf("%d\n",number2);
+
 	close(dev);
 	return 0;
 }
