@@ -62,9 +62,9 @@ bool minigames::is_finish(void){
 
 class genius : public minigames {
 private:
+	ALLEGRO_BITMAP * frames[5];
 	difficulty level;
 	vector<color> sequal;
-	ALLEGRO_BITMAP * frames[5];
 public:
 
 	genius(void);
@@ -256,21 +256,22 @@ void genius::show(void){
 		return;
 	}
 	float w = al_get_bitmap_width(frames[0]),h = al_get_bitmap_height(frames[0]);
+	float dispw = al_get_display_width(cur), disph = al_get_display_height(cur);
 	
 	
 	for(int i=0;i<sequal.size();i++){
 		switch(sequal[i]){
 			case color::red:
-				al_draw_bitmap(frames[1],(float)(al_get_display_width(cur)/2)-w/2,(float)(al_get_display_height(cur)/2)-h/2,0);
+				al_draw_bitmap(frames[1],(dispw/2)-w/2,(disph/2)-h/2,0);
 				break;
 			case color::yellow:
-				al_draw_bitmap(frames[2],(float)(al_get_display_width(cur)/2)-w/2,(float)(al_get_display_height(cur)/2)-h/2,0);
+				al_draw_bitmap(frames[2],(dispw/2)-w/2,(disph/2)-h/2,0);
 				break;
 			case color::green:
-				al_draw_bitmap(frames[3],(float)(al_get_display_width(cur)/2)-w/2,(float)(al_get_display_height(cur)/2)-h/2,0);
+				al_draw_bitmap(frames[3],(dispw/2)-w/2,(disph/2)-h/2,0);
 				break;
 			case color::blue:
-				al_draw_bitmap(frames[4],(float)(al_get_display_width(cur)/2)-w/2,(float)(al_get_display_height(cur)/2)-h/2,0);
+				al_draw_bitmap(frames[4],(dispw/2)-w/2,(disph/2)-h/2,0);
 				break;
 			default:
 				cout << "impossible" << endl;
@@ -280,24 +281,24 @@ void genius::show(void){
 		al_flip_display();
 		al_rest(0.7);
 
-		al_draw_bitmap(frames[0],(float)(al_get_display_width(cur)/2)-w/2,(float)(al_get_display_height(cur)/2)-h/2,0);
+		al_draw_bitmap(frames[0],(dispw/2)-w/2,(disph/2)-h/2,0);
 		al_flip_display();
 
 		al_rest(0.3);
 	}
 	
-	al_draw_bitmap(frames[0],(float)(al_get_display_width(cur)/2)-w/2,(float)(al_get_display_height(cur)/2)-h/2,0);
+	al_draw_bitmap(frames[0],(dispw/2)-w/2,(disph/2)-h/2,0);
 	al_flip_display();
 }
 //----------------------------------------------GENIUS--------------------------------------------------
 
 class translate : public minigames {
 private:
-	difficulty level;
-	int num;
-	int size;
 	ALLEGRO_BITMAP * background;
 	ALLEGRO_FONT * lcd_font;
+	difficulty level;
+	int num;
+	int lcd_size;
 public:
 
 	translate(void);
@@ -313,13 +314,13 @@ public:
 };
 
 translate::translate(void): minigames(){
-	this->size = 100;
+	this->lcd_size = 100;
 	this->background = al_load_bitmap("../img/bin.png");
 	if(this->background == nullptr){
 		cout << "error in load translate background" << endl;
 	}
 	
-	this->lcd_font = al_load_ttf_font("../font/DS-DIGI.TTF",size,0);
+	this->lcd_font = al_load_ttf_font("../font/DS-DIGI.TTF",lcd_size,0);
 	if(this->lcd_font == nullptr){
 		cout << "error in load DS-DIGI font" << endl;
 	}
@@ -395,9 +396,10 @@ void translate::show(void){
 		return;
 	}
 	float w = al_get_bitmap_width(this->background),h = al_get_bitmap_height(this->background);
+	float dispw = al_get_display_width(cur), disph = al_get_display_height(cur);
 	
-	al_draw_bitmap(this->background,(float)(al_get_display_width(cur)/2)-w/2,(float)(al_get_display_height(cur)/2)-h/2,0);
-	al_draw_textf(this->lcd_font,al_map_rgb(255,255,255),(float)(al_get_display_width(cur)/2)-(float)(this->size/2),(float)(al_get_display_height(cur)/2)-(float)(this->size/2),0,"%d",this->num);
+	al_draw_bitmap(this->background,(dispw/2)-w/2,(disph/2)-h/2,0);
+	al_draw_textf(this->lcd_font,al_map_rgb(255,255,255),(dispw/2)-(float)(this->lcd_size/2),(disph/2)-(float)(this->lcd_size/2),0,"%d",this->num);
 	al_flip_display();
 }
 //------------------------------------------------TRANSLATE---------------------------------------------
@@ -405,8 +407,13 @@ void translate::show(void){
 class cut_wire : public minigames{
 private:
 	ALLEGRO_BITMAP * wires[8];
-	vector<int> what_wires;
+	ALLEGRO_BITMAP * background;
+	ALLEGRO_FONT * lcd_font;
 	difficulty level;
+	string ans;
+	map<string,int> bitmask;
+	int usr_lcd[4];
+	int lcd_size;
 public:
 
 	cut_wire(void);
@@ -423,18 +430,73 @@ public:
 
 
 cut_wire::cut_wire(void){
+	this->background = al_load_bitmap("../img/cut_wire_background.png");
+	if(this->background == nullptr){
+		cout << "error in load cut_wire background" << endl;
+	}
 
+	string pre = "../img/";
+	string colors[8] = {
+						"black",
+						"red",
+						"green",
+						"blue",
+						"ocean",
+						"yellow",
+						"pink",
+						"white"
+						};
+	string suf = "_wire.png";
+
+	this->bitmask["000"] = 0;
+	this->bitmask["100"] = 1;
+	this->bitmask["010"] = 2;
+	this->bitmask["001"] = 3;
+	this->bitmask["011"] = 4;
+	this->bitmask["110"] = 5;
+	this->bitmask["101"] = 6;
+	this->bitmask["111"] = 7;
+
+	this->ans = "";
+	this->lcd_size = 100;
+
+	this->lcd_font = al_load_ttf_font("../font/DS-DIGI.TTF",this->lcd_size,0);
+
+	for(int i=0;i<8;i++){
+		string filename = pre + colors[i] + suf;
+		this->wires[i] = al_load_bitmap(filename.c_str());
+		if(this->wires[i] ==  nullptr){
+			cout << "error in load wire " + to_string(i) << endl;
+		}
+	}
 }
 
 cut_wire::~cut_wire(void){
-
+	al_destroy_bitmap(this->background);
+	for(int i=0;i<8;i++){
+		al_destroy_bitmap(this->wires[i]);
+	}
+	al_destroy_font(this->lcd_font);
 }
 
 void cut_wire::read(bool op){
 	if(op){
 		
 	}else{
-		
+		int usr_ans;
+		bool got_it = false;
+
+		cin >> usr_ans;
+		usr_ans--;
+
+		for(int i=0;i<4;i++){
+			if(this->bitmask[this->ans] == this->usr_lcd[i]){
+				if(usr_ans == i) got_it = true;
+			}
+		}
+
+		if(got_it) this->next_level();
+		else this->reset();
 	}
 }
 
@@ -444,7 +506,35 @@ void cut_wire::start(void){
 }
 
 void cut_wire::run(void){
-	
+	random_device dev;
+	uniform_int_distribution<int> zeroorone(0,1);
+	uniform_int_distribution<int> colorrange(0,6);
+	vector<int> what_wire = {0,1,2,3,4,5,6,7};
+	this->ans = "";
+
+	for(int i=0;i<3;i++){
+		if(zeroorone(dev)){
+			this->ans += '1';
+		}else{
+			this->ans += '0';
+		}
+	}
+
+	swap(what_wire[this->bitmask[this->ans]],what_wire[7]);
+
+	what_wire.pop_back();
+
+	for(int i=0;i<4;i++){
+		if(i != 3) this->usr_lcd[i] = what_wire[colorrange(dev)];
+		else{
+			this->usr_lcd[i] = this->bitmask[this->ans];
+
+			random_shuffle(this->usr_lcd,this->usr_lcd+4);
+		}
+	}
+
+	this->show();
+	this->read(false);
 }
 
 void cut_wire::stop(void){
@@ -470,6 +560,34 @@ void cut_wire::reset(void){
 		this->trys++;
 	}
 }
+
+void cut_wire::show(void){
+	ALLEGRO_DISPLAY * cur = al_get_current_display();
+	if(cur == nullptr){
+		cout << "error loading current display" << endl;
+		return;
+	}
+
+	float w = al_get_bitmap_width(this->background),h = al_get_bitmap_height(this->background);
+	float dispw = al_get_display_width(cur), disph = al_get_display_height(cur);
+	
+	al_draw_bitmap(this->background,(dispw/2)-w/2,(disph/2)-h/2,0);
+	al_draw_textf(this->lcd_font,al_map_rgb(255,0,0),(dispw/2)-(float)(this->lcd_size)-6,(disph/4)-(float)(this->lcd_size/6)+6,0,"%c",this->ans[0]);
+	al_draw_textf(this->lcd_font,al_map_rgb(0,255,0),(dispw/2)-(float)(this->lcd_size)+this->lcd_size-6,(disph/4)-(float)(this->lcd_size/6)+6,0,"%c",this->ans[1]);
+	al_draw_textf(this->lcd_font,al_map_rgb(0,0,255),(dispw/2)-(float)(this->lcd_size)+2*this->lcd_size-6,(disph/4)-(float)(this->lcd_size/6)+6,0,"%c",this->ans[2]);
+
+	w = al_get_bitmap_width(this->wires[0]), h = al_get_bitmap_height(this->wires[0]);
+	float waux = al_get_bitmap_width(this->background);
+
+	
+	for(int i=0;i<4;i++){
+		al_draw_bitmap(this->wires[this->usr_lcd[i]],(dispw/2)+this->lcd_size*i-waux/6-18,(disph/2)-h/2+3.0*this->lcd_size/4,0);
+	}
+
+	al_flip_display();
+}
+
+//------------------------------------------------CUT_WIRE------------------------------------------------
 
 //############################ GLOBAIS ########################
 
@@ -522,7 +640,7 @@ int main(void){
 	al_start_timer(timer);
 	al_register_event_source(qu, al_get_keyboard_event_source());
 	
-	minigames* m = new translate();
+	minigames* m = new genius();
 
 	m->start();
 	
