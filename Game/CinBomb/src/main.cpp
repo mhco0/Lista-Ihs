@@ -8,12 +8,13 @@
 #define WIDTH 1920.0
 using namespace std;
 
-
+//################################CLASSES###################################
 enum class difficulty {easy,medium,hard};
 enum class color : int {red = 1,yellow = 2,green = 3,blue = 4};
 
 class minigames{
 protected:
+
 	int trys,place;
 public:
 	enum class status: int {stoped,started,finished};
@@ -38,14 +39,17 @@ minigames::minigames(void){
 }
 
 minigames::minigames(int p):minigames(){
+
 	this->place = p;
 }
 
 int minigames::get_trys(void){
+
 	return this->trys;
 }
 
 int minigames::my_place(void){
+
 	return this->place;
 }
 
@@ -53,6 +57,8 @@ bool minigames::is_finish(void){
 	if(this->my_status == minigames::status::finished) return true;
 	else return false;
 }
+
+//--------------------------------------------MINIGAMES-----------------------------------------------
 
 class genius : public minigames {
 private:
@@ -62,6 +68,7 @@ private:
 public:
 
 	genius(void);
+	~genius(void);
 	void read(bool op);
 	void start(void);
 	void run(void);
@@ -86,7 +93,12 @@ genius::genius(void):minigames(){
 			cout << "error in load image" << endl;
 		}
 	}
-	
+}
+
+genius::~genius(void){
+	for(int i=0;i<5;i++){
+		al_destroy_bitmap(this->frames[i]);
+	}
 }
 
 void genius::read(bool op){
@@ -219,11 +231,10 @@ void genius::stop(void){
 		this->my_status = minigames::status::stoped;
 }
 
-
 void genius::finish(void){
+
 	this->my_status = minigames::status::finished;
 }
-
 
 void genius::next_level(void){
 	if(level == difficulty::easy) level = difficulty::medium;
@@ -268,15 +279,17 @@ void genius::show(void){
 		
 		al_flip_display();
 		al_rest(0.7);
+
 		al_draw_bitmap(frames[0],(float)(al_get_display_width(cur)/2)-w/2,(float)(al_get_display_height(cur)/2)-h/2,0);
 		al_flip_display();
+
 		al_rest(0.3);
 	}
 	
 	al_draw_bitmap(frames[0],(float)(al_get_display_width(cur)/2)-w/2,(float)(al_get_display_height(cur)/2)-h/2,0);
 	al_flip_display();
 }
-
+//----------------------------------------------GENIUS--------------------------------------------------
 
 class translate : public minigames {
 private:
@@ -288,6 +301,7 @@ private:
 public:
 
 	translate(void);
+	~translate(void);
 	void read(bool op);
 	void start(void);
 	void finish(void);
@@ -299,7 +313,7 @@ public:
 };
 
 translate::translate(void): minigames(){
-	this->size = 50;
+	this->size = 100;
 	this->background = al_load_bitmap("../img/bin.png");
 	if(this->background == nullptr){
 		cout << "error in load translate background" << endl;
@@ -309,11 +323,23 @@ translate::translate(void): minigames(){
 	if(this->lcd_font == nullptr){
 		cout << "error in load DS-DIGI font" << endl;
 	}
-	
+}
+
+translate::~translate(void){
+	al_destroy_bitmap(this->background);
+	al_destroy_font(this->lcd_font);
 }
 
 void translate::read(bool op){
-	
+	if(op){
+		
+	}else{
+		int usr_num;
+		cin >> usr_num;
+
+		if(usr_num ==  this->num) this->next_level();
+		else this->reset();
+	}
 }
 
 void translate::start(void){
@@ -336,6 +362,7 @@ void translate::run(void){
 	}	
 
 	this->show();
+	this->read(false);
 }
 
 void translate::stop(void){
@@ -343,11 +370,10 @@ void translate::stop(void){
 		this->my_status = minigames::status::stoped;
 }
 
-
 void translate::finish(void){
+
 	this->my_status = minigames::status::finished;
 }
-
 
 void translate::next_level(void){
 	if(level == difficulty::easy) level = difficulty::medium;
@@ -371,8 +397,87 @@ void translate::show(void){
 	float w = al_get_bitmap_width(this->background),h = al_get_bitmap_height(this->background);
 	
 	al_draw_bitmap(this->background,(float)(al_get_display_width(cur)/2)-w/2,(float)(al_get_display_height(cur)/2)-h/2,0);
-	al_draw_textf(this->lcd_font,al_map_rgb(255,255,255),(float)(al_get_display_width(cur)/2)-(float)(this->size/2-25),(float)(al_get_display_height(cur)/2)-(float)(this->size/2),ALLEGRO_ALIGN_CENTRE,"%d",this->num);
+	al_draw_textf(this->lcd_font,al_map_rgb(255,255,255),(float)(al_get_display_width(cur)/2)-(float)(this->size/2),(float)(al_get_display_height(cur)/2)-(float)(this->size/2),0,"%d",this->num);
+	al_flip_display();
 }
+//------------------------------------------------TRANSLATE---------------------------------------------
+
+class cut_wire : public minigames{
+private:
+	ALLEGRO_BITMAP * wires[8];
+	vector<int> what_wires;
+	difficulty level;
+public:
+
+	cut_wire(void);
+	~cut_wire(void);
+	void read(bool op);
+	void start(void);
+	void finish(void);
+	void run(void);
+	void stop(void);
+	void next_level(void);
+	void reset(void);
+	void show(void);
+};
+
+
+cut_wire::cut_wire(void){
+
+}
+
+cut_wire::~cut_wire(void){
+
+}
+
+void cut_wire::read(bool op){
+	if(op){
+		
+	}else{
+		
+	}
+}
+
+void cut_wire::start(void){
+	if(!this->is_finish())
+		this->my_status = minigames::status::started;
+}
+
+void cut_wire::run(void){
+	
+}
+
+void cut_wire::stop(void){
+	if(!this->is_finish())
+		this->my_status = minigames::status::stoped;
+}
+
+
+void cut_wire::finish(void){
+	this->my_status = minigames::status::finished;
+}
+
+
+void cut_wire::next_level(void){
+	if(level == difficulty::easy) level = difficulty::medium;
+	else if(level == difficulty::medium) level = difficulty::hard;
+	else if(level == difficulty::hard) this->finish();
+}
+
+void cut_wire::reset(void){
+	if(!this->is_finish()){
+		level = difficulty::easy;
+		this->trys++;
+	}
+}
+
+//############################ GLOBAIS ########################
+
+ALLEGRO_TIMER *timer = nullptr;
+ALLEGRO_EVENT_QUEUE *qu = nullptr;
+ALLEGRO_DISPLAY *disp = nullptr;
+ALLEGRO_FONT *font = nullptr;
+
 
 bool al_init_everything(void){
 	if(!al_init()) return false;
@@ -383,6 +488,14 @@ bool al_init_everything(void){
 	return true;
 }
 
+bool al_destroy_everything(void){
+	al_destroy_font(font);
+    al_destroy_display(disp);
+    al_destroy_timer(timer);
+    al_destroy_event_queue(qu);
+
+    return true;
+}
 
 int main(void){
 	ios::sync_with_stdio(false);
@@ -396,13 +509,16 @@ int main(void){
 
     al_set_new_display_flags(ALLEGRO_FULLSCREEN_WINDOW);
 
-    ALLEGRO_TIMER *timer = al_create_timer(1.0 / FPS);
-    ALLEGRO_EVENT_QUEUE *qu = al_create_event_queue();
-	ALLEGRO_DISPLAY *disp = al_create_display(WIDTH,HEIGHT);
-    ALLEGRO_FONT *font = al_create_builtin_font();
+    timer = al_create_timer(1.0 / FPS);
+    qu = al_create_event_queue();
+	disp = al_create_display(WIDTH,HEIGHT);
+    font = al_create_builtin_font();
 
     ALLEGRO_EVENT ev;
+    ALLEGRO_TIMEOUT t;
 
+    al_clear_to_color(al_map_rgb(0,0,0));
+    al_init_timeout(&t,1.0/FPS);
 	al_start_timer(timer);
 	al_register_event_source(qu, al_get_keyboard_event_source());
 	
@@ -411,7 +527,7 @@ int main(void){
 	m->start();
 	
     while(true){
-    	al_wait_for_event(qu, &ev);
+    	al_wait_for_event_until(qu, &ev,&t);
 		
         if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE){
 			break;
@@ -428,16 +544,15 @@ int main(void){
 				m->stop();
 				break;
 			}
-          	al_flip_display();
         }
     }
 	
 	cout << m->get_trys() << endl;
 
-    al_destroy_font(font);
-    al_destroy_display(disp);
-    al_destroy_timer(timer);
-    al_destroy_event_queue(qu);
+    if(!al_destroy_everything()){
+		cout << "Error in destroy allegro memes" << endl;
+		return -1;
+	}
 
 	return 0;
 }
