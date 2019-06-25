@@ -10,6 +10,53 @@
 #define WIDTH 1920.0
 using namespace std;
 
+
+//############################ GLOBAIS ########################
+enum OPS {HEXPORT,INPORT,DISPLAY,RED_LEDS,GREEN_LEDS,KEYS,SWITCHES};
+
+ALLEGRO_TIMER *timer = nullptr;
+ALLEGRO_EVENT_QUEUE *qu = nullptr;
+ALLEGRO_DISPLAY *disp = nullptr;
+ALLEGRO_FONT *font = nullptr;
+uint32_t number = 0x45604560;//0x30307878;//0x40407979;
+uint64_t number2 = 2; // core dump
+int dev; 
+
+//##################################################FUNÇÕES##########################################################
+
+bool al_init_everything(void){
+	if(!al_init()) return false;
+    if(!al_install_keyboard()) return false;
+	if(!al_init_image_addon()) return false;
+	if(!al_init_font_addon())  return false;
+	if(!al_init_ttf_addon()) return false;
+	return true;
+}
+
+bool al_destroy_everything(void){
+	al_destroy_font(font);
+    al_destroy_display(disp);
+    al_destroy_timer(timer);
+    al_destroy_event_queue(qu);
+
+    return true;
+}
+
+void real_write(int debug,int dev,unsigned char * buffer,int opt){
+	int ret;
+	al_rest(0.1);
+	ret = write(dev,buffer,opt);
+	ret = write(dev,buffer,opt);
+	if( ret != -1) printf("ok -> %d\n",debug);
+}
+
+void real_read(int debug,int dev,char *buffer,int opt){
+	int ret = read(dev,buffer,opt);
+	
+	if(ret == -1) cout << "error in genius true read ->"<< debug << endl;
+}
+
+
 //################################CLASSES###################################
 enum class difficulty {easy,medium,hard};
 enum class color : int {red = 1,yellow = 2,green = 3,blue = 4};
@@ -107,7 +154,71 @@ genius::~genius(void){
 
 void genius::read(bool op){
 	if(op){
+		bool youdidit = false;
 		
+		uint64_t busy_wait = 15;
+		
+		for(int i=0;i<(int)sequal.size();i++){
+			
+			uint64_t pick = 15;
+			string ans,input;
+			
+			do{	
+				real_read(0,dev,(char *)&pick,KEYS);
+			}while(pick == busy_wait);
+			
+			switch(sequal[i]){
+				case color::red:
+					ans = "red";
+					break;
+				case color::yellow:
+					ans = "yellow";
+					break;
+				case color::green:
+					ans = "green";
+					break;
+				case color::blue:
+					ans = "blue";
+					break;
+				default:
+					cout << "impossible" << endl;
+					break;
+			}
+			
+			switch(pick){
+				case 7:
+					input = "red";
+					break;
+				case 11:
+					input = "blue";
+					break;
+				case 13:
+					input = "green";
+					break;
+				case 14:
+					input = "yellow";
+					break;
+				default:
+					input = "";
+					cout << "invalid_op" << endl;
+					break;
+			}
+			al_rest(0.5); //because of the break or continue
+			cout <<"voce selecionou :" << input << endl;
+			if(input != ans){
+				cout << "errado" << endl;
+				break;
+			}else{
+				cout << "certo" << endl;
+				if(i == ((int)sequal.size())-1) youdidit = true;
+				continue;
+			}
+			
+
+		}
+		
+		if(youdidit) this->next_level();
+		else this->reset();
 	}else{
 		bool youdidit = false;
 		for(int i=0;i<(int)sequal.size();i++){
@@ -227,7 +338,7 @@ void genius::run(void){
 	
 	
 	this->show();
-	this->read(false);
+	this->read(true);
 }
 
 void genius::stop(void){
@@ -485,7 +596,47 @@ cut_wire::~cut_wire(void){
 
 void cut_wire::read(bool op){
 	if(op){
+		bool got_it = false;
+		int usr_ans;
+		uint64_t busy_wait = 15;
+		uint64_t pick = 15;
+		string st = "errou";
+			
+		do{	
+			real_read(0,dev,(char *)&pick,KEYS);
+		}while(pick == busy_wait);
 		
+		switch(pick){
+			case 7:
+				usr_ans = 0;
+				break;
+			case 11:
+				usr_ans = 1;
+				break;
+			case 13:
+				usr_ans = 2;
+				break;
+			case 14:
+				usr_ans = 3;
+				break;
+			default:
+				usr_ans = -1;
+				cout << "invalid_op" << endl;
+				break;
+		}
+		
+		for(int i=0;i<4;i++){
+			if(this->bitmask[this->ans] == this->usr_lcd[i]){
+				if(usr_ans == i){
+					got_it = true;
+					st = "correto";
+				}
+			}
+		}
+		al_rest(0.3);
+		cout << st << endl;
+		if(got_it) this->next_level();
+		else this->reset();
 	}else{
 		int usr_ans;
 		bool got_it = false;
@@ -538,7 +689,7 @@ void cut_wire::run(void){
 	}
 
 	this->show();
-	this->read(false);
+	this->read(true);
 }
 
 void cut_wire::stop(void){
@@ -610,44 +761,6 @@ arrow::~arrow(void){
 	al_destroy_bitmap(this->my_arrow);
 }
 
-//############################ GLOBAIS ########################
-
-enum OPS {HEXPORT,INPORT,DISPLAY,RED_LEDS,GREEN_LEDS,KEYS,SWITCHES};
-
-ALLEGRO_TIMER *timer = nullptr;
-ALLEGRO_EVENT_QUEUE *qu = nullptr;
-ALLEGRO_DISPLAY *disp = nullptr;
-ALLEGRO_FONT *font = nullptr;
-uint32_t number = 0x45604560;//0x30307878;//0x40407979;
-uint64_t number2 = 2;
-
-
-bool al_init_everything(void){
-	if(!al_init()) return false;
-    if(!al_install_keyboard()) return false;
-	if(!al_init_image_addon()) return false;
-	if(!al_init_font_addon())  return false;
-	if(!al_init_ttf_addon()) return false;
-	return true;
-}
-
-bool al_destroy_everything(void){
-	al_destroy_font(font);
-    al_destroy_display(disp);
-    al_destroy_timer(timer);
-    al_destroy_event_queue(qu);
-
-    return true;
-}
-
-void real_write(int debug,int dev,unsigned char * buffer,int opt){
-	int ret;
-	al_rest(0.1);
-	ret = write(dev,buffer,opt);
-	ret = write(dev,buffer,opt);
-	if( ret != -1) printf("ok -> %d\n",debug);
-}
-
 int main(void){
 	ios::sync_with_stdio(false);
 	cin.tie(0);
@@ -657,6 +770,9 @@ int main(void){
 		cout << "Error in init allegro memes" << endl;
 		return -1;
 	}
+	
+	dev = open("/dev/de2i150_altera", O_RDWR);
+	printf("%d\n",dev);
 
     al_set_new_display_flags(ALLEGRO_FULLSCREEN_WINDOW);
 
@@ -673,22 +789,15 @@ int main(void){
 	al_start_timer(timer);
 	al_register_event_source(qu, al_get_keyboard_event_source());
 	
-	minigames* m = new genius();
-	
-	int dev = open("/dev/de2i150_altera", O_RDWR);
+	minigames* m = new cut_wire();
 
-	printf("%d\n",dev);
+	//real_write(0,dev,(unsigned char *)&number,RED_LEDS);
 
-	real_write(0,dev,(unsigned char *)&number,RED_LEDS);
+	//int ret = read(dev,(char *)&number2,SWITCHES);
 
-	int ret = read(dev,(char *)&number2,SWITCHES);
-	al_rest(0.5);
+	//if(ret == -1) printf("deu erro na leitura\n");
 
-	if(ret == -1) printf("deu erro na leitura\n");
-
-	printf("%d\n",number2);
-
-	close(dev);
+	//printf("%d\n",number2);
 
 	m->start();
 	
@@ -719,6 +828,8 @@ int main(void){
 		cout << "Error in destroy allegro memes" << endl;
 		return -1;
 	}
+
+	close(dev);
 
 	return 0;
 }
