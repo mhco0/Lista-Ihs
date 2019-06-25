@@ -679,7 +679,7 @@ int main(void){
 
 	printf("%d\n",dev);
 
-	real_write(0,dev,(unsigned char *)&number,GREEN_LEDS);
+	real_write(0,dev,(unsigned char *)&number,HEXPORT);
 
 	//int ret = read(dev,&number2,KEYS);
 
