@@ -1,5 +1,5 @@
 ALLEGRO_FLAG = -lallegro -lallegro_image -lallegro_ttf -lallegro_font 
-CPPFLAGS += -std=c++0x -L/home/de2i-150/Desktop/Lista-ihs/allegro5/build/lib -W -Wall -O2 -O3 
+CPPFLAGS += -std=c++0x -L/home/de2i-150/Desktop/Lista-ihs/allegro5/build/lib -W -Wall -Wextra -O2 -O3 
 
 all:
 	g++ main.cpp $(CPPFLAGS) $(ALLEGRO_FLAG) -o CinBomb

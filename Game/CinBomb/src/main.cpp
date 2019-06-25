@@ -618,8 +618,8 @@ ALLEGRO_TIMER *timer = nullptr;
 ALLEGRO_EVENT_QUEUE *qu = nullptr;
 ALLEGRO_DISPLAY *disp = nullptr;
 ALLEGRO_FONT *font = nullptr;
-uint32_t number = 0x40794079;
-uint32_t number2 = 2;
+uint32_t number = 0x45604560;//0x30307878;//0x40407979;
+uint64_t number2 = 2;
 
 
 bool al_init_everything(void){
@@ -673,19 +673,20 @@ int main(void){
 	al_start_timer(timer);
 	al_register_event_source(qu, al_get_keyboard_event_source());
 	
-	minigames* m = new cut_wire();
+	minigames* m = new genius();
 	
 	int dev = open("/dev/de2i150_altera", O_RDWR);
 
 	printf("%d\n",dev);
 
-	real_write(0,dev,(unsigned char *)&number,GREEN_LEDS);
+	real_write(0,dev,(unsigned char *)&number,RED_LEDS);
 
-	//int ret = read(dev,&number2,KEYS);
+	int ret = read(dev,(char *)&number2,SWITCHES);
+	al_rest(0.5);
 
-	//if(ret == -1) printf("deu erro na leitura\n");
+	if(ret == -1) printf("deu erro na leitura\n");
 
-	//printf("%d\n",number2);
+	printf("%d\n",number2);
 
 	close(dev);
 
