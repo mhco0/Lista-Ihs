@@ -157,6 +157,20 @@ void genius::read(bool op){
 		bool youdidit = false;
 		
 		uint64_t busy_wait = 15;
+		uint64_t error = 0b111111111111111111;
+		uint64_t blank = 0b000000000000000000;
+		
+		uint64_t fl = 0b10000000;
+		uint64_t fm = 0b11000000;
+		uint64_t fh = 0b11100000;
+		
+		if(level ==  difficulty::easy){
+			real_write(0,dev,(unsigned char*)&fl,GREEN_LEDS);
+		}else if(level == difficulty::medium){
+			real_write(0,dev,(unsigned char*)&fm,GREEN_LEDS);
+		}else{
+			real_write(0,dev,(unsigned char*)&fh,GREEN_LEDS);
+		}
 		
 		for(int i=0;i<(int)sequal.size();i++){
 			
@@ -206,6 +220,9 @@ void genius::read(bool op){
 			al_rest(0.5); //because of the break or continue
 			cout <<"voce selecionou :" << input << endl;
 			if(input != ans){
+				real_write(0,dev,(unsigned char*)&error,RED_LEDS);
+				al_rest(0.1);
+				real_write(0,dev,(unsigned char*)&blank,RED_LEDS);
 				cout << "errado" << endl;
 				break;
 			}else{
@@ -449,6 +466,14 @@ translate::~translate(void){
 void translate::read(bool op){
 	if(op){
 		
+		uint64_t pick = 0;
+		do{
+			real_read(0,dev,(char*)&pick,SWITCHES);
+			
+			al_rest(0.5);
+		}while(this->num!=pick);
+		
+		this->next_level();
 	}else{
 		int usr_num;
 		cin >> usr_num;
@@ -478,7 +503,7 @@ void translate::run(void){
 	}	
 
 	this->show();
-	this->read(false);
+	this->read(true);
 }
 
 void translate::stop(void){
@@ -633,7 +658,7 @@ void cut_wire::read(bool op){
 				}
 			}
 		}
-		al_rest(0.5);
+		al_rest(0.3);
 		cout << st << endl;
 		if(got_it) this->next_level();
 		else this->reset();
@@ -789,7 +814,7 @@ int main(void){
 	al_start_timer(timer);
 	al_register_event_source(qu, al_get_keyboard_event_source());
 	
-	minigames* m = new cut_wire();
+	minigames* m = new translate();
 
 	//real_write(0,dev,(unsigned char *)&number,RED_LEDS);
 
