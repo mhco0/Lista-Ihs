@@ -14,3 +14,6 @@ Para instalar o driver é necessario que se vá na pasta `projeto_base_drivers` 
 encontra em `Game/CinBomb/src` , se tudo estiver sido feito com sucesso basta rodar make no terminal dessa pasta e um display será mostrado
 com o jogo padrão Genius , para alterar os jogos basta ir no código da main e na linha 817 em `minigames* m = new genius();` trocar a classe 
 de jogo que está sendo criada , exemplo: quero mudar para o jogo Cut Wire  então eu vou na linha 817 e escrevo `minigames* m = new cut_wire();`.
+
+### Detalhe
+O projeto se encontra em [](https://github.com/mhco0/Lista-ihs) . Basta entrar nesse link para mais detalhes
