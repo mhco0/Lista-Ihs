@@ -16,4 +16,4 @@ com o jogo padrão Genius , para alterar os jogos basta ir no código da main e 
 de jogo que está sendo criada , exemplo: quero mudar para o jogo Cut Wire  então eu vou na linha 817 e escrevo `minigames* m = new cut_wire();`.
 
 ### Detalhe
-O projeto se encontra em [](https://github.com/mhco0/Lista-ihs) . Basta entrar nesse link para mais detalhes
+O projeto se encontra em [https://github.com/mhco0/Lista-ihs](https://github.com/mhco0/Lista-ihs) . Basta entrar nesse link para mais detalhes
