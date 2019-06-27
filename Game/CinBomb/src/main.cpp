@@ -814,7 +814,7 @@ int main(void){
 	al_start_timer(timer);
 	al_register_event_source(qu, al_get_keyboard_event_source());
 	
-	minigames* m = new translate();
+	minigames* m = new genius();
 
 	//real_write(0,dev,(unsigned char *)&number,RED_LEDS);
 
